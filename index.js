@@ -13,25 +13,49 @@ class Tree {
   }
 }
 
-function buildTree(dataArray, start, end) {
-  let sortedData = merge_sort(dataArray);
-  sortedData = [...new Set(sortedData)]; // remove duplicates
+let testArray = [1, 7, 7, 23, 4, 23, 8, 9, 3, 5, 67, 67, 6345, 324];
+testArray = merge_sort(testArray);
+testArray = [...new Set(testArray)];
+console.log(testArray);
 
+let testTree = new Tree(testArray);
+testTree.root = buildTree(testArray, 0, testArray.length - 1);
+prettyPrint(testTree.root);
+insert(70000);
+prettyPrint(testTree.root);
+
+function insert(data) {
+  testTree.root = insertRec(testTree.root, data);
+}
+
+function insertRec(root, data) {
+  if (root == null) {
+    root = new Node(data);
+    return root;
+  }
+
+  if (data < root.data) {
+    root.left = insertRec(root.left, data);
+  } else if (data > root.data) {
+    root.right = insertRec(root.right, data);
+  }
+
+  return root;
+}
+
+function buildTree(dataArray, start, end) {
   if (start > end) {
     return null;
   }
 
   let mid = parseInt((start + end) / 2);
-  let node = new Node(sortedData[mid]);
+  let node = new Node(dataArray[mid]);
 
-  node.left = buildTree(sortedData, start, mid - 1);
-  node.right = buildTree(sortedData, mid + 1, end);
+  node.left = buildTree(dataArray, start, mid - 1);
+  node.right = buildTree(dataArray, mid + 1, end);
 
   return node;
 }
-
-let testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-prettyPrint(buildTree(testArray, 0, testArray.length - 1));
 
 function prettyPrint(node, prefix = "", isLeft = true) {
   if (node === null) {
