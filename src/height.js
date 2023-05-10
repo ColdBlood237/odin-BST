@@ -1,21 +1,12 @@
 function call_height(node) {
-  let counter = 0;
-  height(node);
-
-  function height(node) {
-    if (node == null) {
-      return;
-    }
-
-    counter++;
-    if (node.left != null) {
-      height(node.left, node);
-    } else if (node.right != null) {
-      height(node.right, node);
-    }
+  if (node == null) {
+    return 0;
   }
 
-  return counter;
+  let left_height = call_height(node.left) + 1;
+  let right_height = call_height(node.right) + 1;
+
+  return left_height > right_height ? left_height : right_height;
 }
 
 export default call_height;
