@@ -8,6 +8,8 @@ import find from "./find";
 import levelOrder from "./level_order";
 import { call_inorder, call_postorder, call_preorder } from "./depth_first";
 import call_height from "./height";
+import call_depth from "./depth";
+import Node from "./node";
 
 let testArray = [1, 7, 7, 23, 4, 23, 8, 9, 5, 67, 67, 6345, 324];
 testArray = merge_sort(testArray);
@@ -17,6 +19,5 @@ console.log(testArray);
 let testTree = new Tree(testArray);
 testTree.root = buildTree(testArray, 0, testArray.length - 1);
 prettyPrint(testTree.root);
-
-console.log(testTree.root);
-console.log(call_height(testTree.root));
+console.log(call_height(testTree.root), "tree's height");
+console.log(call_depth(testTree.root, testTree.root.left));
