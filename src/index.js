@@ -12,25 +12,35 @@ import call_depth from "./depth";
 import Node from "./node";
 import isBalanced from "./isBalanced";
 import rebalance from "./rebalance";
+import random_array from "./random_array";
 
-let testArray = [1, 7, 7, 23, 4, 23, 8, 9, 5, 67, 67, 6345, 324];
+const test_array = random_array();
 
-testArray = merge_sort(testArray);
-testArray = [...new Set(testArray)];
-console.log(testArray);
+console.log(test_array);
 
-let testTree = new Tree(testArray);
-testTree.root = buildTree(testArray, 0, testArray.length - 1);
+const test_tree = new Tree(test_array);
+test_tree.root = buildTree(test_array, 0, test_array.length - 1);
 
-deleteKey(testTree.root, 1);
-// deleteKey(testTree.root, 7);
-//deleteKey(testTree.root, 5);
+prettyPrint(test_tree.root);
+console.log("balanced :", isBalanced(test_tree.root));
 
-prettyPrint(testTree.root);
+console.log("level order:", levelOrder(test_tree.root));
+console.log("preorder:", call_preorder(test_tree.root));
+console.log("postorder:", call_postorder(test_tree.root));
+console.log("inorder", call_inorder(test_tree.root));
 
-console.log("balanced :", isBalanced(testTree.root));
-console.log(call_inorder(testTree.root));
+for (let i = 0; i < 101; i++) {
+  insert(test_tree.root, Math.floor(Math.random() * 1000));
+}
 
-testTree.root = rebalance(testTree.root);
-prettyPrint(testTree.root);
-console.log("new tree balanced: ", isBalanced(testTree.root));
+prettyPrint(test_tree.root);
+console.log("balanced :", isBalanced(test_tree.root));
+
+test_tree.root = rebalance(test_tree.root);
+prettyPrint(test_tree.root);
+console.log("balanced :", isBalanced(test_tree.root));
+
+console.log("level order:", levelOrder(test_tree.root));
+console.log("preorder:", call_preorder(test_tree.root));
+console.log("postorder:", call_postorder(test_tree.root));
+console.log("inorder", call_inorder(test_tree.root));

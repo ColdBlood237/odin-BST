@@ -7,7 +7,7 @@ function levelOrder(root, fn) {
 
   while (queue.length !== 0) {
     let current = queue.shift();
-    levelArray.push(current);
+    levelArray.push(current.data);
     if (fn) {
       fn(current);
     }
