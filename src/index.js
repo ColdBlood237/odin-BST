@@ -10,6 +10,7 @@ import { call_inorder, call_postorder, call_preorder } from "./depth_first";
 import call_height from "./height";
 import call_depth from "./depth";
 import Node from "./node";
+import isBalanced from "./isBalanced";
 
 let testArray = [1, 7, 7, 23, 4, 23, 8, 9, 5, 67, 67, 6345, 324];
 testArray = merge_sort(testArray);
@@ -18,6 +19,11 @@ console.log(testArray);
 
 let testTree = new Tree(testArray);
 testTree.root = buildTree(testArray, 0, testArray.length - 1);
+// deleteKey(testTree.root, 1);
+// deleteKey(testTree.root, 7);
+//deleteKey(testTree.root, 5);
 prettyPrint(testTree.root);
+
 console.log(call_height(testTree.root), "tree's height");
 console.log(call_depth(testTree.root, testTree.root.left));
+console.log(isBalanced(testTree.root));
